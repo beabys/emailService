@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+var rabbit = require("../models/rabbitMQ/rabbitMQ");
+var consumer = require("../models/rabbitMQ/consumer");
+//start consumer
+consumer(rabbit);

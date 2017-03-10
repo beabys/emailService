@@ -3,6 +3,8 @@ var router = express.Router();
 var uuidV4 = require("uuid/v4");
 var mail = require('../services/mail/mail');
 var adapter = require("../models/adapter");
+var rabbit = require("../models/rabbitMQ/rabbitMQ");
+var producer = require("../models/rabbitMQ/producer");
 
 /**
  * GET mail listing
@@ -58,6 +60,7 @@ router.post("/", function (req, res, next) {
                             error: "service unavailable in this moment"
                         });
                     } else {
+                        producer(data, rabbit);
                         res.status(201);
                         res.json({
                             SUCCESS:true,
