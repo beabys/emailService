@@ -1,3 +1,4 @@
+process.env.DATABASE = "test";
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var should = chai.should();
@@ -19,9 +20,15 @@ describe('Mail Page', function() {
     it('should have a post Method', function (done) {
         chai.request(server)
             .post("/mail")
-            .send({"id" : 1})
+            .send({
+                "subject" : "test",
+                "content" : "this is a tes",
+                "receiver_name" : "test receiver",
+                "receiver_email" : "test@test.com",
+                "provider" : "test"
+            })
             .end(function(err, res){
-                res.should.have.status(200);
+                res.should.have.status(201);
                 res.should.be.json;
                 res.body.should.be.a('object');
                 res.body.should.have.property('SUCCESS');
@@ -42,7 +49,7 @@ describe('Mail Page', function() {
 
     it('shouldn\'t have a delete Method', function (done) {
         chai.request(server)
-            .put("/mail/1")
+            .delete("/mail/1")
             .end(function(err, res){
                 res.should.have.status(404);
                 done();
