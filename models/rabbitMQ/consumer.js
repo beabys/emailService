@@ -27,7 +27,7 @@ var consumer = function (rabbit) {
                     var provider = new mailProvider(data.provider).getProvider(data);
                     var service = new mailService(provider);
                     service.sendMail(function (result) {
-                        //updatedb
+                        //@TODO updatedb
                         console.log(result);
                     });
                     ch.ack(msg);

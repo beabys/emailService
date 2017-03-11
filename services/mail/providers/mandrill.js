@@ -70,17 +70,3 @@ MandrillMail.prototype.sendMail = function (callback) {
 
 
 module.exports = MandrillMail;
-/*
-var data = {
-    sender_email : "contact@alfonsorodriguez.xyz",
-    sender_name : "test mail",
-    content : "i send you this mail because its a tes",
-    subject : "this is a test",
-    receiver_name : "Alfonso",
-    receiver_email : "beabys@gmail.com"
-};
-
-var elMandrill = new MandrillMail(data);
-elMandrill.sendMail(function (response) {
-    console.log(response);
-});*/
