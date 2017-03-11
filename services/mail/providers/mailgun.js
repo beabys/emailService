@@ -58,17 +58,3 @@ Mailgun.prototype.sendMail = function (callback) {
 };
 
 module.exports = Mailgun;
-/*
-var data = {
-    sender_email : "contact@alfonsorodriguez.com",
-    sender_name : "Alfonso Rodriguez",
-    content : "i send you this mail because its a tes",
-    subject : "this is a test",
-    receiver_name : "Alfonso",
-    receiver_email : "asd"
-};
-
-var mailgunn = new Mailgun(data);
-mailgunn.sendMail(function (response) {
-    console.log(response);
-});*/

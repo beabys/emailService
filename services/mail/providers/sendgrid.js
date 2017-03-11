@@ -1,5 +1,5 @@
 var sendgrid = require('sendgrid').mail;
-var sg = require('sendgrid')("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");
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 /**
  * Sendgrid class
