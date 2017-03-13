@@ -35,8 +35,8 @@ Methods available for Request :
 * GET
 
 ###Parameters
- | Parameter | Type | Description |
- | ------ | ------ | ------ |
+ | Parameter |  Type  | Description |
+ |-----------|--------|-------------|
  | `subject` | String | Subject in the mail |
  | `content` | String | Content of the mail |
  | `receiver_name` | String | Name of the receiver |
@@ -46,7 +46,7 @@ Methods available for Request :
 ###Parameters
 
  | Parameter | Type | Description |
- | --------- | ---- | ----------- |
+ |-----------|------|-------------|
  | `SUCCESS` | Boolean | Status of the mail<br/>false : not delivered.<br/>true : delivered. |
  | `message_id` | String |  `(optional)` UUID of the message. |
  | `status` | String |  `(optional)` Status of the message. |
@@ -55,7 +55,7 @@ Methods available for Request :
 ###Response Codes
 
 | Response Codes | Definition | Description |
-| -------------- | ---------- | ----------- |
+|----------------|------------|-------------|
 | 200 | OK | return Response of status ID |
 | 202 | Accepted | The request has been accepted for processing |
 | 400 | Bad Request | Invalid Request |
