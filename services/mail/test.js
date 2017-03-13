@@ -11,7 +11,7 @@ function TestProvider(data){}
  */
 TestProvider.prototype.sendMail = function (callback) {
     callback({
-        success : true,
+        success : false,
         retry : true,
         message : ''
     });

@@ -12,23 +12,23 @@ describe('Mail Page', function() {
         chai.request(server)
             .get("/mail")
             .end(function(err, res){
-                res.should.have.status(200);
+                res.should.have.status(400);
                 done();
             });
     });
 
     it('should have a post Method', function (done) {
+        var mock = new Meme();
         chai.request(server)
             .post("/mail")
             .send({
                 "subject" : "test",
                 "content" : "this is a tes",
                 "receiver_name" : "test receiver",
-                "receiver_email" : "test@test.com",
-                "provider" : "test"
+                "receiver_email" : "test@test.com"
             })
             .end(function(err, res){
-                res.should.have.status(201);
+                res.should.have.status(202);
                 res.should.be.json;
                 res.body.should.be.a('object');
                 res.body.should.have.property('SUCCESS');

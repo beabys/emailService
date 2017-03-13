@@ -6,16 +6,22 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "amqplib": "^0.5.1",
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "dotenv": "^4.0.0",
     "express": "~4.14.1",
     "express-validator": "^3.1.2",
+    "mailgun-js": "^0.8.2",
+    "mandrill-api": "^1.0.45",
     "mongodb": "^2.2.24",
     "mongoose": "^4.8.6",
     "morgan": "~1.7.0",
+    "nock": "^9.0.9",
+    "node-mailjet": "^3.0.6",
     "pug": "~2.0.0-beta10",
+    "sendgrid": "^4.8.0",
     "serve-favicon": "~2.3.2",
     "uuid": "^3.0.1"
   },

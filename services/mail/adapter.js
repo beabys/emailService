@@ -1,6 +1,7 @@
-var mandrill = require('./mandrill');
-var mailgun = require('./mailgun');
-var sendgrid = require('./sendgrid');
+var mailgun = require('./mailgunAdapter');
+var mailjet = require('./mailjetAdapter');
+var mandrill = require('./mandrillAdapter');
+var sendgrid = require('./sendgridAdapter');
 var test = require('./test');
 
 /**
@@ -17,20 +18,22 @@ function Adapter(provider){
  */
 Adapter.prototype.getProvider = function(data) {
     switch (this.provider) {
-        case "mandrill":
-            return new mandrill(data);
         case "mailgun":
             return new mailgun(data);
+        case "mailjet":
+            return new mailjet(data);
+        case "mandrill":
+            return new mandrill(data);
         case "sendgrid":
             return new sendgrid(data);
         case "test":
             return new test(data);
         default:
-            throw ('no database implemented');
+            throw ('no Email Service implemented');
     }
 };
 
 /**
- * @type {Provider}
+ * @type {Adapter}
  */
 module.exports = Adapter;

@@ -23,16 +23,14 @@ function Mailgun(data) {
  * @returns {{success: boolean, retry: boolean, message: string}}
  */
 Mailgun.handleResponse = function(error, response) {
-    //var error = this.mapResponse(response.statusCode);
     var result = {
         success : true,
         retry : false,
         message : ''
     };
     if (error) {
-        //update ya no enviar por que la data esta mal
         result.success = false;
-        result.retry = false;
+        result.retry = true;
         result.message = response.message;
     }
     return result;

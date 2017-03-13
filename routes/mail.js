@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var uuidV4 = require("uuid/v4");
-var mail = require('../services/mail/mail');
-var adapter = require("../models/adapter");
+var mail = require('../models/mongo/mail');
 var rabbit = require("../models/rabbitMQ/rabbitMQ");
 var producer = require("../models/rabbitMQ/producer");
 
@@ -10,13 +9,51 @@ var producer = require("../models/rabbitMQ/producer");
  * GET mail listing
  */
 router.get('/', function(req, res, next) {
-  res.json('respond with a json');
+    res.status(400);
+    res.json({
+        SUCCESS: false,
+        status: "error",
+        errors: {message : "invalid request", code : 400}
+    });
+});
+
+/**
+ * GET mail status listing
+ */
+router.get('/:id', function(req, res, next) {
+    mail.getMailbyId(req.params.id, function (err, mailEntry) {
+        if (err) {
+            res.status(500);
+            res.json({
+                SUCCESS: false,
+                status: "error",
+                errors: {message : "service unavailable", code : 500}
+            });
+        } else {
+            if (mailEntry.length > 0) {
+                res.status(202);
+                res.json({
+                    SUCCESS: true,
+                    status: mailEntry[0].status,
+                    last_status_update : mailEntry[0].updated_at
+                });
+            } else {
+                res.status(400);
+                res.json({
+                    SUCCESS: false,
+                    status: "error",
+                    errors: {message : "invalid request", code : 400}
+                });
+            }
+        }
+    });
 });
 
 /**
  * Post mail listing
  */
 router.post("/", function (req, res, next) {
+    //validation of fields
     req.checkBody('content', 'message is required').notEmpty();
     req.checkBody('receiver_name', 'receiver_name is required').notEmpty();
     req.checkBody('receiver_email', 'receiver_email is required ').notEmpty();
@@ -27,17 +64,17 @@ router.post("/", function (req, res, next) {
             res.status(400);
             res.json({
                 SUCCESS: false,
-                errors: errors
+                status: "error",
+                errors: {message : errors, code : 400}
             });
 
         } else {
+            //if no errors on validation
             try {
                 var dataValue = req.body;
+                //create data message
                 var data = {
                     message_id : uuidV4(),
-                    provider : dataValue.provider || dataValue.provider != undefined ?
-                        dataValue.provider :
-                        process.env.MAIL_PROVIDER,
                     sender_email : process.env.MAIL_SENDER_EMAIL,
                     sender_name : process.env.MAIL_SENDER_NAME,
                     content : dataValue.content,
@@ -49,22 +86,27 @@ router.post("/", function (req, res, next) {
                     receiver_email : dataValue.receiver_email,
                     status : "initial"
                 };
-                var db = new adapter(process.env.DATABASE).getAdapter(data);
-                var newMail = new mail(db);
-                newMail.saveMail(function (err, mail) {
+                var newMail = new mail(data);
+                mail.createMail(newMail, function (err, mail) {
                     if (err) {
                         console.error(err);
                         res.status(400);
                         res.json({
                             SUCCESS:false,
-                            error: "service unavailable in this moment"
+                            status: "error",
+                            errors: {message :"service unavailable in this moment", code : 400}
                         });
                     } else {
+                        //send message to queue
                         producer(data, rabbit);
-                        res.status(201);
+                        res.status(202);
+                        var urlLocation = req.protocol + '://' + req.get('host') + '/mail/' + mail.message_id;
+                        res.setHeader('Location' , urlLocation );
+                        //res.location("/mail/" + mail.message_id);
                         res.json({
-                            SUCCESS:true,
-                            id: mail._id
+                            SUCCESS : true,
+                            message_id : mail.message_id,
+                            status : "initial"
                         });
                     }
                 });
@@ -73,7 +115,8 @@ router.post("/", function (req, res, next) {
                 res.status(400);
                 res.json({
                     SUCCESS:false,
-                    error: "service unavailable in this moment"
+                    status: "error",
+                    errors: {message : "service unavailable in this moment", code : 400}
                 });
             }
         }
