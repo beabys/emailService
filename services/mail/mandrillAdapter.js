@@ -58,13 +58,24 @@ MandrillMail.prototype.sendMail = function (callback) {
         }]
     };
     mandrill_client.messages.send({"message": message, "async": async, "ip_pool": ip_pool, "send_at": send_at}, function(result) {
-        callback(MandrillMail.handleResponse(result));
+        var handleResponse = MandrillMail.handleResponse(result);
+        callback(handleResponse);
     }, function(e) {
-        callback({
+        var response = {
             success : false,
             retry : false,
             message : e
-        });
+        };
+        if (e.code == 11) {
+            response.success = false;
+            response.message = e.status + ' : ' + e.message;
+        } else {
+            response.success = false;
+            response.retry = true;
+            response.message = e.status + ' : ' + e.message;
+        }
+
+        callback(response);
     });
 };
 
