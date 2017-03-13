@@ -35,31 +35,31 @@ Methods available for Request :
 * GET
 
 ###Parameters
- | Parameter |  Type  | Description |
- |-----------|--------|-------------|
- | `subject` | String | Subject in the mail |
- | `content` | String | Content of the mail |
- | `receiver_name` | String | Name of the receiver |
- | `receiver_email` | String | Email |
+|    Parameter   |  Type  |     Description      |
+|----------------|--------|----------------------|
+| subject        | String | Subject in the mail  |
+| content        | String | Content of the mail  |
+| receiver_name  | String | Name of the receiver |
+| receiver_email | String | Email                |
  
 #Response
 ###Parameters
 
- | Parameter | Type | Description |
- |-----------|------|-------------|
- | `SUCCESS` | Boolean | Status of the mail<br/>false : not delivered.<br/>true : delivered. |
- | `message_id` | String |  `(optional)` UUID of the message. |
- | `status` | String |  `(optional)` Status of the message. |
- | `error` | Object | Status of the message (optional) <br /> `message` : Message or the error. <br />`code` : code of the error |
+|   Parameter  |   Type  |     Description     |
+|--------------|---------|---------------------|
+| SUCCESS      | Boolean | Status of the mail<br/>false : not delivered.<br/>true : delivered. |
+| message_id   | String  | (optional) UUID of the message. |
+| status       | String  | (optional)` Status of the message. |
+| error        | Object  | Status of the message (optional) <br /> `message` : Message or the error. <br />`code` : code of the error |
 
 ###Response Codes
 
-| Response Codes | Definition | Description |
-|----------------|------------|-------------|
-| 200 | OK | return Response of status ID |
-| 202 | Accepted | The request has been accepted for processing |
-| 400 | Bad Request | Invalid Request |
-| 500 | Internal Server Error | Ups!, my fault |
+| Response Codes | Definition  |  Description   |
+|----------------|-------------|----------------|
+| 200            | OK          | return Response of status ID |
+| 202            | Accepted    | The request has been accepted for processing |
+| 400            | Bad Request | Invalid Request |
+| 500            | Internal Server Error | Internal Server Error |
  
 ###Example Response
 ####POST METHODS
