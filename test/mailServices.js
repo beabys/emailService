@@ -101,15 +101,7 @@ describe("Testing mandrill API", function () {
                 }
             });
 
-        var mandrill = new mandrillAdapter({
-            sender_email : "contact@alfonsorodriguez.xyz",
-            sender_name : "test",
-            receiver_email : "beabys@gmail.com",
-            receiver_name : "test",
-            subject : "test",
-            content_type : "plain/text",
-            content : "test"
-        });
+        var mandrill = new mandrillAdapter(data);
         mandrill.sendMail(function (res) {
             expect(res.success).to.equal(true);
             done();
