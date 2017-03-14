@@ -16,9 +16,9 @@ Email Service
 
 #Usage
 ####Install Dependencies
-copy the .env.example to .env anf fill the variables required for configuration
+copy the .env.example to .env and fill the variables required for configuration
 
-    cp /route_of_your_project/.env.example /route_of_your_project/.env
+    cp .env.example .env
 ####Install Dependencies
 
     npm install
@@ -43,6 +43,7 @@ Methods available for Request :
 | content | String | Content of the mail |
 | receiver_name | String | Name of the receiver |
 | receiver_email | String | Email |
+| content_type | String | (optional) Content  typeof the mail <br \>default text/plain |
  
 #Response
 ###Parameters
@@ -76,14 +77,14 @@ Methods available for Request :
 #####ERROR 
 ######WRONG MESSAGE
     
-    `{
+    {
       "SUCCESS": false,
       "status": "error",
       "errors": {
         "message": {
           "receiver_email": {
             "param": "receiver_email",
-            "msg": "is not a email valid",
+            "msg": "is not a valid email",
             "value": "beabys@gmai"
           }
         },
