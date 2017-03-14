@@ -25,6 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
+if (process.env.BASIC_USER != '' && process.env.BASIC_PASSWD != '' ) {
+    app.use(express.basicAuth(process.env.BASIC_USER, process.env.BASIC_PASSWD));
+}
 
 app.use('/', index);
 app.use('/mail', mail);

@@ -32,11 +32,51 @@ copy the .env.example to .env and fill the variables required for configuration
     node bin/consumer
     
 #Request
+Endpoint for Requests:
+ 
+    http://www.beabys.xyz/mail
+
 Methods available for Request : 
 * POST
 * GET
 
-###Parameters
+
+###Request Method GET
+
+    http://www.beabys.xyz/mail/<uuid>
+    
+| Parameter | Description |
+| --- | --- |
+| UUID | ID of the mail |
+
+###Response Method Get
+
+| Response Codes | Definition | Description |
+| --- | --- | --- |
+| 200 | OK | return Response status of mail |
+| 400 | Bad Request | Invalid Request |
+
+####GET METHOD
+#####SUCCESS 
+
+    {
+      "SUCCESS": true,
+      "message_id": "UUID of message",
+      "status": "status of the message Initial"
+    }
+    
+#####ERROR 
+
+    {
+      SUCCESS: false,
+      status: "error",
+      errors: {
+        message: "invalid request",
+        code: 400
+      }
+    }
+
+###Request Method Post
 | Parameter | Type | Description |
 | --- | --- | --- |
 | subject | String | Subject in the mail |
@@ -45,8 +85,7 @@ Methods available for Request :
 | receiver_email | String | Email |
 | content_type | String | (optional) Content  typeof the mail <br \>default text/plain |
  
-#Response
-###Parameters
+###Response Method POST
 
 | Parameter | Type  | Description |
 | --- | --- | --- |
@@ -59,13 +98,11 @@ Methods available for Request :
 
 | Response Codes | Definition | Description |
 | --- | --- | --- |
-| 200 | OK | return Response of status ID |
 | 202 | Accepted | The request has been accepted for processing |
 | 400 | Bad Request | Invalid Request |
 | 500 | Internal Server Error | Internal Server Error |
  
-###Example Response
-####POST METHODS
+####Example Response
 #####SUCCESS 
 
     {
@@ -85,7 +122,7 @@ Methods available for Request :
           "receiver_email": {
             "param": "receiver_email",
             "msg": "is not a valid email",
-            "value": "beabys@gmai"
+            "value": "invalid@mail"
           }
         },
         "code": 400

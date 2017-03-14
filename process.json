@@ -1,0 +1,19 @@
+{
+  "apps" : [{
+    "name"        : "app",
+    "script"      : "./bin/wgit ww",
+    "watch"       : true,
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+    "error_file"      : "../docker/data/node/err.log",
+    "out_file"        : "../docker/data/node/out.log",
+    "merge_logs"      : true
+  },{
+    "name"        : "consumer",
+    "script"      : "./bin/consumer",
+    "watch"       : true,
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+    "error_file"      : "../docker/data/node/err.log",
+    "out_file"        : "../docker/data/node/out.log",
+    "merge_logs"      : true
+  }]
+}

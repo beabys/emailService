@@ -87,3 +87,10 @@ Some of non standard modules used:
 * [sendgrid](https://www.npmjs.com/package/sendgrid)
 * [uuid](https://www.npmjs.com/package/uuid)
 * [amqplib](https://www.npmjs.com/package/amqplib)
+
+##Technologies used in this project
+* Docker containers 
+* Capistrano
+* Node.Js
+* RabbitMQ
+* MongoDB
