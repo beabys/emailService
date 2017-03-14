@@ -1,7 +1,7 @@
 {
   "apps" : [{
     "name"        : "app",
-    "script"      : "./bin/wgit ww",
+    "script"      : "./bin/www",
     "watch"       : true,
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "error_file"      : "../docker/data/node/err.log",

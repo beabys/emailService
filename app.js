@@ -25,8 +25,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
+
 if (process.env.BASIC_USER != '' && process.env.BASIC_PASSWD != '' ) {
-    app.use(express.basicAuth(process.env.BASIC_USER, process.env.BASIC_PASSWD));
+    app.use(function(req, res, next) {
+        var auth;
+        if (req.headers.authorization) {
+            auth = new Buffer(req.headers.authorization.substring(6), 'base64').toString().split(':');
+        }
+        if (!auth || auth[0] !== process.env.BASIC_USER || auth[1] !== process.env.BASIC_PASSWD) {
+            res.statusCode = 401;
+            res.setHeader('WWW-Authenticate', 'Basic realm="' + process.env.BASIC_USER + '"');
+            res.end('Unauthorized');
+        } else {
+            next();
+        }
+    });
 }
 
 app.use('/', index);
