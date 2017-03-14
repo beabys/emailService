@@ -1,5 +1,4 @@
-var express = require('express');
-var router = express.Router();
+var router = require('express').Router();
 var uuidV4 = require("uuid/v4");
 var mail = require('../models/mongo/mail');
 var rabbit = require("../models/rabbitMQ/rabbitMQ");
@@ -9,6 +8,7 @@ var producer = require("../models/rabbitMQ/producer");
  * GET mail listing
  */
 router.get('/', function(req, res, next) {
+    res.removeHeader("X-Powered-By");
     res.status(400);
     res.json({
         SUCCESS: false,
@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
  * GET mail status listing
  */
 router.get('/:id', function(req, res, next) {
+    res.removeHeader("X-Powered-By");
     mail.getMailbyId(req.params.id, function (err, mailEntry) {
         if (err) {
             res.status(500);
@@ -53,11 +54,12 @@ router.get('/:id', function(req, res, next) {
  * Post mail listing
  */
 router.post("/", function (req, res, next) {
+    res.removeHeader("X-Powered-By");
     //validation of fields
     req.checkBody('content', 'message is required').notEmpty();
     req.checkBody('receiver_name', 'receiver_name is required').notEmpty();
     req.checkBody('receiver_email', 'receiver_email is required ').notEmpty();
-    req.checkBody('receiver_email', 'is not a email valid').isEmail();
+    req.checkBody('receiver_email', 'is not a valid email').isEmail();
     req.getValidationResult().then(function(result) {
         if (!result.isEmpty())  {
             var errors = result.useFirstErrorOnly().mapped();
