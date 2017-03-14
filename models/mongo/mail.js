@@ -61,6 +61,12 @@ module.exports.getMailbyId = function(messageID, callback) {
     mails.find(query, callback);
 };
 
+/**
+ * @param query
+ * @param update
+ * @param options
+ * @param callback
+ */
 module.exports.updateById = function (query, update, options, callback) {
     mails.findOneAndUpdate(query, update, options, callback);
 };

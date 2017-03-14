@@ -1,5 +1,225 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+      p
+        |
+        a(href='https://github.com/beabys/emailService')
+          h3 github repo
+      h2#requirements Requirements
+      ul
+        li
+          em Node.js
+        li
+          em RabbitMQ
+        li
+          em MongoDB
+      h2#mail-service-providers Mail Service Providers
+        p
+        h4 Services used in this project:
+      ul
+        li
+          a(href='https://mandrillapp.com/') mandrill
+        li
+          a(href='https://www.mailgun.com/') mailgun
+        li
+          a(href='https://www.mailjet.com/') mailjet
+        li
+          a(href='https://sendgrid.com/') sendgrid
+      h1#usage Usage
+      h4#install-dependencies Install Dependencies
+      p copy the .env.example to .env and fill the variables required for configuration
+      pre  cp .env.example .env
+      h4#install-dependencies-1 Install Dependencies
+      pre npm install
+
+      h4#start-service Start Service
+      pre npm start
+
+      h4#start-consumer Start Consumer
+      pre node bin/consumer
+
+      h1#request Request
+      p Methods available for Request :
+        | POST
+        | GET
+      h3#parameters Parameters
+      table.table.table-striped
+        thead
+          tr.header
+            th(align='left') Parameter
+            th(align='left') Type
+            th(align='left') Description
+        tbody
+          tr.odd
+            td(align='left') subject
+            td(align='left') String
+            td(align='left') Subject in the mail
+          tr.even
+            td(align='left') content
+            td(align='left') String
+            td(align='left') Content of the mail
+          tr.odd
+            td(align='left') receiver_name
+            td(align='left') String
+            td(align='left') Name of the receiver
+          tr.even
+            td(align='left') receiver_email
+            td(align='left') String
+            td(align='left') Email
+          tr.odd
+            td(align='left') content_type
+            td(align='left') String
+            td(align='left') (optional) Content  typeof the mail
+              br
+              |default text/plain
+      h1#response Response
+      h3#parameters-1 Parameters
+      table.table.table-striped
+        thead
+          tr.header
+            th(align='left') Parameter
+            th(align='left') Type
+            th(align='left') Description
+        tbody
+          tr.odd
+            td(align='left') SUCCESS
+            td(align='left') Boolean
+            td(align='left')
+              | Status of the mail
+              br
+              | false : not delivered.
+              br
+              | true : delivered.
+          tr.even
+            td(align='left') message_id
+            td(align='left') String
+            td(align='left') (optional) UUID of the message.
+          tr.odd
+            td(align='left') status
+            td(align='left') String
+            td(align='left')
+              | (optional) Status of the message.
+          tr.even
+            td(align='left') error
+            td(align='left') Object
+            td(align='left') (optional) Status of the message
+              br
+              | message : Message or the error.
+              br
+              | code : code of the error
+      h3#response-codes Response Codes
+      table.table.table-striped
+        thead
+          tr.header
+            th(align='left') Response Codes
+            th(align='left') Definition
+            th(align='left') Description
+        tbody
+          tr.odd
+            td(align='left') 200
+            td(align='left') OK
+            td(align='left') Return Response of status ID
+          tr.even
+            td(align='left') 202
+            td(align='left') Accepted
+            td(align='left') The request has been accepted for processing
+          tr.odd
+            td(align='left') 400
+            td(align='left') Bad Request
+            td(align='left') Invalid Request
+          tr.even
+            td(align='left') 500
+            td(align='left') Internal Server Error
+            td(align='left') Internal Server Error
+
+      h3#example-response Example Response
+      h4#post-methods POST METHODS
+      h5#success SUCCESS
+      pre.code
+        |{
+        |  "SUCCESS": true,
+        |  "message_id": "UUID of message",
+        |  "status": "status of the message Initial"
+        |}
+
+      h5#error ERROR
+      h6#wrong-message WRONG MESSAGE
+      pre.code
+        |{
+        |  "SUCCESS": false,
+        |  "status": "error",
+        |  "errors": {
+        |    "message": {
+        |      "receiver_email": {
+        |        "param": "receiver_email",
+        |        "msg": "is not a valid email",
+        |        "value": "beabys@gmai"
+        |      }
+        |    },
+        |    "code": 400
+        |  }
+        |}
+
+      h6#internal-error INTERNAL ERROR
+      pre.code
+        |{
+        |  "SUCCESS": false,
+        |  "status": "error",
+        |  "errors": {
+        |    "message": "service unavailable",
+        |    "code": 500
+        |  }
+        |}
+
+      h4#get-method GET METHOD
+      h5#success-1 SUCCESS
+      pre.code
+        |{
+        |  SUCCESS: false,
+        |  status: "initial",
+        |  last_status_update: "2028-08-18T08:08:08.088Z"
+        |}
+      h5#error-1 ERROR
+      h6#wrong-message-1 WRONG MESSAGE
+      pre.code
+        |{
+        |  SUCCESS: false,
+        |  status: "error",
+        |  errors: {
+        |    message: "invalid request",
+        |    code: 400
+        |  }
+        |}
+
+      h6#internal-error-1 INTERNAL ERROR
+      pre.code
+        |{
+        |  SUCCESS: false,
+        |  status: "error",
+        |  errors: {
+        |    message: "service unavailable"",
+        |    code: 500
+        |    }
+        |}
+
+      h3#integration Integration
+      h4#examples Examples
+      ul
+        li
+          a(href='https://github.com/beabys/emailService/blob/master/docs/curl.md') cURL
+        li
+          a(href='https://github.com/beabys/emailService/blob/master/docs/go.md') Go
+        li
+          a(href='https://github.com/beabys/emailService/blob/master/docs/javascript.md') Javascript
+        li
+          a(href='https://github.com/beabys/emailService/blob/master/docs/node.md') Node.js
+        li
+          a(href='https://github.com/beabys/emailService/blob/master/docs/php.md') Php
+        li
+          a(href='https://github.com/beabys/emailService/blob/master/docs/ruby.md') Ruby
+      h2#author Author
+      p
+        | This Email Service was created by Alfonso Rodriguez (
+        a(href='http://twitter.com/beabys') @beabys
+        | )
+

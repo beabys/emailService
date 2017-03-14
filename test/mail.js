@@ -1,11 +1,22 @@
+process.env.RABBITMQ_QUEUE = 'test';
+process.env.MAIL_PROVIDERS='';
 process.env.DATABASE = "test";
+process.env.MONGODB_DATABASE ='test';
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var should = chai.should();
-var server = require('../../app');
+var server = require('../app');
+var mongoose = require('mongoose');
 
 chai.use(chaiHttp);
 
+after(function (done) {
+    mongoose.connection.db.dropDatabase(function () {
+        mongoose.connection.close(function () {
+            done();
+        });
+    });
+});
 
 describe('Mail Page', function() {
     it('Index page shoul have a get method', function (done) {
@@ -18,14 +29,13 @@ describe('Mail Page', function() {
     });
 
     it('should have a post Method', function (done) {
-        var mock = new Meme();
         chai.request(server)
             .post("/mail")
             .send({
                 "subject" : "test",
-                "content" : "this is a tes",
-                "receiver_name" : "test receiver",
-                "receiver_email" : "test@test.com"
+                "content" : "test",
+                "receiver_name" : "test",
+                "receiver_email" : "test@test.tst"
             })
             .end(function(err, res){
                 res.should.have.status(202);

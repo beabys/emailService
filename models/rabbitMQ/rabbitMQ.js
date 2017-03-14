@@ -4,11 +4,15 @@ var amqp = require('amqplib/callback_api');
  * @param cb
  */
 module.exports = function(cb) {
-    amqp.connect('amqp://localhost', function(err, conn) {
-            if (err) {
-                throw new Error(err);
-            }
-            cb(conn);
+    var config = process.env;
+    var userPass = config.RABBITMQ_USER != '' && config.RABBITMQ_PASSWORD ?
+        config.RABBITMQ_USER + ':' + config.RABBITMQ_PASSWORD + '@' : '';
+    var port = config.RABBITMQ_PORT != ''  ? ':' + config.RABBITMQ_PORT : '';
+
+    amqp.connect('amqp://' + userPass + config.RABBITMQ_HOST + port, function(err, conn) {
+        if (err) {
+            throw new Error(err);
         }
-    )
+        cb(conn);
+    });
 };

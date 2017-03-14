@@ -22,7 +22,6 @@ please register your own test accounts on each.
 
 ##Project structure
     Email Service
-    ├── .env
     ├── .env.example
     ├── README.md
     ├── app.js
@@ -51,11 +50,12 @@ please register your own test accounts on each.
     │   ├── images
     │   ├── javascripts
     │   └── stylesheets
+    │       ├── bootstrap.min.css
+    │       ├── bootstrap-theme.min.css
     │       └── style.css
     ├── routes
     │   ├── index.js
-    │   ├── mail.js
-    │   └── users.js
+    │   └── mail.js
     ├── services
     │   └── mail
     │       ├── adapter.js
@@ -66,7 +66,8 @@ please register your own test accounts on each.
     │       └── test.js
     ├── test
     │   ├── index.js
-    │   └── mail.js
+    │   ├── mail.js
+    │   └── mailServices.js
     └── views
         ├── error.pug
         ├── index.pug
