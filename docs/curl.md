@@ -1,4 +1,4 @@
-#####cURL
+##### cURL
 
     curl --request POST \
       --url http://host_to_request/mail \
