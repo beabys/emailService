@@ -19,6 +19,7 @@
         req, _ := http.NewRequest("POST", url, payload)
     
         req.Header.Add("content-type", "application/json")
+        req.Header.Add("authorization", "Basic <user:password base64 encode>")
     
         res, _ := http.DefaultClient.Do(req)
     

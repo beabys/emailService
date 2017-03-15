@@ -8,6 +8,7 @@
       "port": "port",
       "path": "/mail",
       "headers": {
+        "authorization": "Basic <user:password base64 encode>"
         "content-type": "application/json"
       }
     };

@@ -15,6 +15,7 @@
       CURLOPT_CUSTOMREQUEST => "POST",
       CURLOPT_POSTFIELDS => "{\n        \"subject\" : \"subject\",\n        \"content\" : \"message content\",\n        \"receiver_name\" : \"receiver name\",\n        \"receiver_email\" : \"some@email.com\"\n}",
       CURLOPT_HTTPHEADER => array(
+        "authorization: Basic <user:password base64 encode>",
         "content-type: application/json"
       ),
     ));

@@ -6,6 +6,7 @@
       "url": "http://host_to_request/mail",
       "method": "POST",
       "headers": {
+        "authorization": "Basic <user:password base64 encode>"
         "content-type": "application/json"
       },
       "processData": false,
