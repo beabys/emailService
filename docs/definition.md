@@ -94,3 +94,12 @@ Some of non standard modules used:
 * Node.Js
 * RabbitMQ
 * MongoDB
+
+## MY PROFILE
+
+I'm Alfonso, i was working for several years like a software developer, using 
+PHP as my principal Programing Language, for this project i decide to use Node.js 
+like a new challenge for me.
+
+
+Enjoy this code...
