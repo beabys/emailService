@@ -42,7 +42,7 @@ copy the .env.example to .env and fill the variables required for configuration
 
 Endpoint for Requests:
 
-    http://www.beabys.xyz/mail
+    http://yourhost:port/mail/api/v1
 
 
 Methods available for Request : 
@@ -53,7 +53,7 @@ Methods available for Request :
 
 ## Request Method GET
 
-    http://www.beabys.xyz/mail/<uuid>
+    http://yourhost:port/mail/api/vi/<uuid>
 
 | Parameter | Description |
 | --- | --- |
@@ -171,6 +171,10 @@ Methods available for Request :
 * [Node.js](./docs/node.md)
 * [Php](./docs/php.md)
 * [Ruby](./docs/ruby.md)
+
+you can test the service leaving a message in this url
+
+    http://www.alfonsorodriguez.xyz/contact
 
 ## Author
 

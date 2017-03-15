@@ -43,7 +43,7 @@ if (process.env.BASIC_USER != '' && process.env.BASIC_PASSWD != '' ) {
 }
 
 app.use('/', index);
-app.use('/mail', mail);
+app.use('/mail/api/v1', mail);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
