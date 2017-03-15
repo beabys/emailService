@@ -1,6 +1,6 @@
 Email Service
 =============
-##Definition of Done
+## Definition of Done
 Create a service that accepts the necessary information and sends emails. It
 should provide an abstraction between two different email service providers.
 If one of the services goes down, your service can quickly failover to
@@ -16,11 +16,11 @@ Example Email Providers:
 All listed services are free to try and are pretty painless to sign up for, so
 please register your own test accounts on each.
 
-##Requirements
+## Requirements
 * *RabbitMQ*
 * *MongoDB*
 
-##Project structure
+## Project structure
     Email Service
     ├── .env.example
     ├── README.md
@@ -88,9 +88,22 @@ Some of non standard modules used:
 * [uuid](https://www.npmjs.com/package/uuid)
 * [amqplib](https://www.npmjs.com/package/amqplib)
 
-##Technologies used in this project
+## Technologies used in this project
 * Docker containers 
 * Capistrano
 * Node.Js
 * RabbitMQ
 * MongoDB
+
+## Service EndPoint
+
+    http://www.beabys.xyz/mail/api/v1
+
+## MY PROFILE
+
+I'm Alfonso, i was working for several years like a software developer, using 
+PHP as my principal Programing Language, for this project i decide to use Node.js 
+like a new challenge for me.
+
+
+Enjoy this code...
