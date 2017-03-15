@@ -102,7 +102,7 @@ router.post("/", function (req, res, next) {
                         //send message to queue
                         producer(data, rabbit);
                         res.status(202);
-                        var urlLocation = req.protocol + '://' + req.get('host') + '/mail/' + mail.message_id;
+                        var urlLocation = req.protocol + '://' + req.get('host') + '/mail/api/v1/' + mail.message_id;
                         res.setHeader('Location' , urlLocation );
                         //res.location("/mail/" + mail.message_id);
                         res.json({

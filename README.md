@@ -53,7 +53,7 @@ Methods available for Request :
 
 ## Request Method GET
 
-    http://yourhost:port/mail/api/vi/<uuid>
+    http://yourhost:port/mail/api/v1/<uuid>
 
 | Parameter | Description |
 | --- | --- |
