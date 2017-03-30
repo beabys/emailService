@@ -2,7 +2,7 @@ Email Service
 =============
 ## Description of the project
 
-* [definition.md](./docs/definition.md)
+* [Definition](./docs/definition.md)
 
 ## Prerequisites
 * [Node.js](https://nodejs.org)
